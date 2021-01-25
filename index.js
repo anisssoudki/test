@@ -1,48 +1,52 @@
+const form = document.createElement('form')
 
-console.log('connected to index.html')
-
-// https://www-1.ecma-international.org/
-// ecma script is spesification for programing language
-
-
-
-class toDo {
-    constructor(task){
-let ul = document.createElement('ul')
-ul.setAttribute('id', 'ulId')
-document.body.appendChild(ul)
-
-let li = document.createElement('li')
-document.getElementById('ulId')
-ul.appendChild(li)
-
-li.innerText = task
-
-}}
-
-new toDo('brush teeth')
-let submit = document.createElement('Button')
-
-submit.innerText = "click me to add todo"
-
-const addtoDo = (task) => {
-    new toDo(task)
+function append(arg) {
+    document.body.appendChild(arg)
 
 }
-let form = document.createElement('form')
-document.body.appendChild(form)
-let input = document.createElement('input')
+const input = document.createElement('input')
+const submitButton = document.createElement('button')
+submitButton.innerText = 'Submit'
 form.appendChild(input)
+form.appendChild(submitButton)
+append(form)
+const ul = document.createElement('ul')
+append(ul)
 
-input.setAttribute('name', "nameInput")
 
-form.appendChild(submit)
 form.addEventListener('submit', function (e) {
-    addtoDo(e.target[0].value)
+    
     //prevent the normal submission of the form
     e.preventDefault();
-
-    console.log(e.target[0].value);    
+new Todo(e.target[0].value)
+    console.log(e.target[0].value);  
+    e.target[0].value = " "
 });
 
+    
 
+
+class Todo {
+   
+    constructor(todo) {
+        this.todo = todo
+        const li = document.createElement('li')
+        li.innerText = todo
+        let deleteTodoButton = document.createElement('button') 
+        deleteTodoButton.innerText = `delete ${todo}`
+
+        ul.appendChild(li)
+        ul.appendChild(deleteTodoButton)
+   
+        deleteTodoButton.addEventListener("click", function(e){
+            console.log(e)
+            e.target.previousElementSibling.remove()
+            e.target.remove()
+           
+          
+        })
+    }
+  
+
+  
+}
